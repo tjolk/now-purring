@@ -30,7 +30,7 @@ foreach ($locations as $location) {
     }
 
     $events = [];
-    if ($next) {
+    if ($next && $next instanceof DOMElement) {
         // Example: get all event rows under this location
         foreach ($next->getElementsByTagName('div') as $eventDiv) {
             $eventText = trim($eventDiv->textContent);

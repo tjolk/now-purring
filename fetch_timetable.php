@@ -7,8 +7,16 @@ error_reporting(E_ALL);
 // URL of the timetable page
 $url = 'https://www.grauzonefestival.nl/timetable#/2025-02-07';
 
+// Use a User-Agent header to mimic a browser
+$options = [
+    "http" => [
+        "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3\r\n"
+    ]
+];
+$context = stream_context_create($options);
+
 // Fetch the HTML content
-$html = file_get_contents($url);
+$html = file_get_contents($url, false, $context);
 
 // Suppress warnings from malformed HTML
 libxml_use_internal_errors(true);
